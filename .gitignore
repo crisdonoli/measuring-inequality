@@ -2,3 +2,10 @@ documents
 __pycache__/
 *.pyc
 .ipynb_checkpoints/
+
+# Raw CASEN microdata exceeding GitHub's 100 MB per-file limit.
+# Casen1987.dta (65 MB) and Casen1990.dta (25 MB) ARE tracked.
+# Obtain the rest from the original sources (see README, "Data").
+data/CASEN/Casen2006.dta
+data/CASEN/casen_2017.dta
+data/CASEN/casen_2022.dta

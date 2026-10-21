@@ -2,3 +2,5 @@ matplotlib
 fastparquet
 pyarrow
 pandas
+pyxlsb
+scikit-learn
