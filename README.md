@@ -19,17 +19,6 @@ Each step is a self-contained notebook plus a function in `source/`, so the piec
 reused on other countries, years or surveys. The sequence of steps mirrors the
 inequality problems in `documents/PS1_FPA.pdf`; it is not tied to that assignment.
 
-## Status
-
-| Step | Method | Module | Notebook | Status |
-|------|--------|--------|----------|--------|
-| 1 | Survey cleaning, net wealth | `cleaning.py` | `01_efh_cleaning.ipynb` | done |
-| 2 | Rich list, USD → CLP | `cleaning.py` | `02_forbes.ipynb` | done |
-| 3 | Weighted wealth shares (raw survey) | `shares.py` | `03_wealth_inequality.ipynb` | done |
-| 4 | Pareto tail correction + uprating (Vermeulen) | `pareto.py` | `04_vermeulen.ipynb` | done |
-| 5 | Data exploration: CASEN + SII tabulations | `casen.py`, `sii.py` | `05_data_exploration.ipynb` | done |
-| 6 | BFM correction with tax data (Chile 2017/2022) | `bfm.py` | `06_bfm.ipynb` | done |
-| 7 | Intergenerational mobility (Núñez–Miranda) | `mobility.py` | `07_nunez_miranda.ipynb` | done |
 
 ## Repository layout
 
