@@ -295,19 +295,6 @@ latexmk -pdf main.tex
 relative to `sections/` (`../../figures/...`, `../../figures/p1/...`), so re-run the
 notebooks before rebuilding the PDF.
 
-## TO-DO
-
-- [x] **BFM with fine bins.** Wire `gpinter` (generalized Pareto interpolation) to
-      reconstruct the 126 fractal bins from the 7–8 published SII brackets, so the
-      merging point is identified at the same resolution as BFM (2022).
-- [ ] **R dependency.** Make the `gpinter` install reproducible (e.g. `renv` or a
-      documented `install.packages` call) so `.rlibs/` is unnecessary.
-- [ ] **Comparability table** across methods (raw survey / Vermeulen / BFM) and surveys
-      (EFH / CASEN), so the tutorial ends with a single summary figure.
-- [ ] **Parametrize constants**: move the FX rate, the National Accounts aggregate and
-      `w_min` out of the notebooks into a config dict or YAML.
-- [ ] **Weighted estimates** for the mobility tables: the current implementation
-      follows the reference code and does not use CASEN expansion weights.
 
 ## About
 
