@@ -1,0 +1,253 @@
+%! TEX root = ../main.tex
+\section{Mathematical Consequences of Negative Net Wealth on the Gini Coefficient}\label{app:gini-negative}
+
+The standard Gini coefficient was originally formulated for non-negative income distributions ($y_i \ge 0$). When applied to net wealth ($W_i \in \mathbb{R}$), where liabilities can exceed assets ($L_i > A_i \implies W_i < 0$), several desirable axiomatic properties of inequality measurement break down \citep{chen1982relative,raffinetti2015does}.
+
+\subsection*{1. Standard Definition of the Gini Index}
+For a finite population of size $N$ with wealth vector $(W_1, \dots, W_N)$ sorted in non-decreasing order ($W_1 \le W_2 \le \dots \le W_N$) and mean wealth $\bar{W} = \frac{1}{N}\sum_{i=1}^N W_i$, the Gini coefficient is defined through relative mean difference as:
+\begin{equation}
+    G = \frac{\sum_{i=1}^N \sum_{j=1}^N |W_i - W_j|}{2 N^2 \bar{W}} = \frac{2 \sum_{i=1}^N i W_i - (N + 1)\sum_{i=1}^N W_i}{N \sum_{i=1}^N W_i}.
+    \label{eq:gini_def}
+\end{equation}
+
+\subsection*{2. Failure of the Boundedness Axiom ($G \in [0, 1]$)}
+Under non-negative values ($W_i \ge 0$ for all $i$ and $\bar{W} > 0$), $G$ is strictly bounded in $[0, 1]$:
+\begin{itemize}
+    \item $G = 0$ corresponds to perfect equality ($W_1 = W_2 = \dots = W_N = \bar{W}$).
+    \item $G = \frac{N-1}{N} \to 1$ corresponds to extreme concentration ($W_1 = \dots = W_{N-1} = 0$, $W_N = N\bar{W}$).
+\end{itemize}
+
+However, when negative net wealth is present, the mean wealth in the denominator $\bar{W}$ is compressed downwards because negative and positive balances offset each other, while the numerator $\sum_{i,j} |W_i - W_j|$ strictly increases (as pairwise absolute distances between heavily indebted individuals and wealthy individuals become larger).
+
+\paragraph{Mathematical Proof that $G > 1$:}
+Consider a simple stylized 3-agent economy with net wealth values:
+\[
+    W_1 = -d \quad (d > 0), \quad W_2 = 0, \quad W_3 = M \quad (M > d).
+\]
+Total wealth is $\sum_{i=1}^3 W_i = M - d > 0$, and mean wealth is $\bar{W} = \frac{M - d}{3}$. Computing the sum of all pairwise absolute differences:
+\begin{align*}
+    \sum_{i=1}^3 \sum_{j=1}^3 |W_i - W_j| &= 2 \left( |W_1 - W_2| + |W_1 - W_3| + |W_2 - W_3| \right) \\
+    &= 2 \left( d + (M + d) + M \right) = 4M + 4d.
+\end{align*}
+Applying the Gini definition \eqref{eq:gini_def}:
+\begin{equation}
+    G = \frac{4(M + d)}{2 \cdot 3^2 \cdot \left(\frac{M - d}{3}\right)} = \frac{4(M + d)}{6(M - d)} = \frac{2(M + d)}{3(M - d)}.
+\end{equation}
+For any case where $d > \frac{M}{5}$ (with $M > d$):
+\[
+    2(M + d) > 3(M - d) \iff 2M + 2d > 3M - 3d \iff 5d > M \iff G > 1.
+\]
+As aggregate net wealth approaches zero from above ($\bar{W} \to 0^+$, i.e., $d \to M^-$):
+\begin{equation}
+    \lim_{\bar{W} \to 0^+} G = +\infty.
+\end{equation}
+If $\bar{W} < 0$, the denominator becomes negative, rendering $G < 0$ and completely invalidating the geometric and economic interpretation of the Lorenz curve.
+
+\subsection*{3. Violation of Subgroup Decomposability and Monotonicity}
+In addition to the loss of bounds:
+\begin{itemize}
+    \item \textbf{Non-Monotonicity with Respect to Debt Shocks:} Transferring wealth from an indebted individual to a poorer indebted individual (or taking on further debt) can paradoxically lower $G$ if it compresses the denominator faster than the numerator.
+    \item \textbf{Failure of Scale Invariance:} While multiplying all wealth by a positive constant $\lambda > 0$ preserves $G$, shifting all wealth by an additive debt transfer fundamentally distorts the ordering, and standard decompositions into between-group and within-group inequality fail because Lorenz curves can cross the horizontal axis and dip substantially below zero.
+\end{itemize}
+These mathematical instabilities explain why the empirical wealth literature \citep[e.g.,][]{vermeulen2018,oecd2013wealth} predominantly relies on percentile wealth shares rather than synthetic Gini indices.
+
+
+\newpage
+
+\section{Microfoundations of the Power-Law Tail in Wealth}\label{app:pareto-foundations}
+
+A classic question in the economics of inequality is why wealth distributions consistently exhibit a Pareto (power-law) right tail, $P(W > w) \propto w^{-\alpha}$, rather than standard thin-tailed alternatives such as the log-normal or exponential distributions \citep{gabaix2009power,benhabib2018skewed}. The theoretical justification rests on three foundational mechanisms:
+
+\subsection*{1. Multiplicative Wealth Accumulation and Gibrat's Law}
+Consider the dynamic wealth accumulation process of household $i$ across discrete periods $t$:
+\begin{equation}
+    W_{i, t+1} = (1 + r_{i, t}) W_{i, t} + Y_{i, t} - C_{i, t},
+    \label{eq:wealth_accumulation}
+\end{equation}
+where $r_{i, t}$ denotes the stochastic net rate of return on capital, $Y_{i, t}$ is labor income, and $C_{i, t}$ represents consumption. For households situated in the middle or lower strata of the distribution, labor earnings ($Y_{i, t}$) and essential consumption expenditures ($C_{i, t}$) dominate the evolution of net worth. Consequently, additive shocks prevail, generating an empirical distribution that closely approximates a log-normal profile with non-negligible mass at zero and negative net wealth.
+
+In contrast, for individuals in the upper tail ($W_{i, t} \ge w_{\min}$), accumulated wealth dwarfs labor income and living expenses ($W_{i, t} \gg Y_{i, t} - C_{i, t}$). Under these conditions, the accumulation equation simplifies to an essentially multiplicative stochastic process (Gibrat's law of proportionate growth):
+\begin{equation}
+    W_{i, t+1} \approx (1 + r_{i, t}) W_{i, t}.
+\end{equation}
+As demonstrated in the seminal work of \citet{champernowne1953model} and modern random growth theories \citep{gabaix2009power}, the combination of multiplicative random shocks with a lower reflective boundary (or demographic turnover through birth-death generational processes) yields a unique stationary distribution that converges asymptotically to a power law in the tail:
+\begin{equation}
+    \lim_{w \to \infty} P(W > w) = c \cdot w^{-\alpha},
+\end{equation}
+where the tail index $\alpha$ is uniquely determined by the balance between the drift and variance of capital returns relative to the discount rate and generational mortality.
+
+\subsection*{2. Scale-Dependent Returns and Portfolio Heterogeneity}
+In reality, the rate of return on capital $r_{i, t}$ is not independent of scale. Empirical evidence shows that ultra-high-net-worth individuals systematically earn higher and more volatile average returns on wealth \citep{fagereng2020heterogeneity}. This return premium arises from:
+\begin{itemize}
+    \item Greater capacity to absorb liquidity risk through substantial allocations to private equity, real estate development, and venture capital.
+    \item Lower relative risk aversion and cheaper access to credit.
+    \item Significant economies of scale in professional wealth management and exclusive financial information.
+\end{itemize}
+When expected returns scale positively with wealth, the right tail fattens further, reinforcing the empirical validity of the Pareto specification.
+
+\subsection*{3. Scale Invariance and the Self-Similar Property}
+A hallmark feature of the Pareto tail is scale invariance:
+\begin{equation}
+    \frac{P(W > k \cdot w)}{P(W > w)} = k^{-\alpha}, \quad \forall k > 1.
+\end{equation}
+Economically, this implies a fractal-like hierarchy: the distribution of wealth among the top 0.1\% relative to the top 1\% exhibits the exact same structural concentration as that of the top 0.01\% relative to the top 0.1\%. This scale-free regularity is consistently corroborated by external billionaire rankings (e.g., Forbes) and tax registry administrative records across diverse economies.
+
+Hence, the semi-parametric methodology proposed by \citet{vermeulen2018} partitions the domain at $w_{\min}$: the empirical survey weights capture the heterogeneous lower and middle portions of the population, while the parametric Pareto distribution accurately restores the fat upper tail where multiplicative accumulation governs.
+
+
+\newpage
+
+\section{Sufficient Conditions for the Existence and Uniqueness of the Merging Point}\label{app:merging-point-proof}
+
+\begin{center}
+    \small
+    \textbf{Authors:} Sebastián Rivera\textsuperscript{*} (Lead Author), Cristóbal Donoso, and Cristian Valenzuela \\
+    \vspace{0.1em}
+    \footnotesize{\textsuperscript{*}Primary theoretical derivation and analytical proof.}
+\end{center}
+\vspace{0.8em}
+
+\subsection*{1. Introduction and Theoretical Framework}
+
+Accurately measuring income inequality requires combining multiple data sources to overcome the inherent limitations of any single survey instrument. Household surveys, traditionally relied upon for distributional analysis, suffer from a systematic distortion known as \textit{the missing tail problem}. As income rises, the probability of an individual responding to the survey drops monotonically (differential unit non-response), and respondents in the upper deciles systematically under-report their true income, particularly from capital and business assets \citep{deaton2005measuring}.
+
+Conversely, administrative tax records capture the upper tail with high precision and coverage. However, they fail to adequately represent low- and middle-income strata due to legal tax exemption thresholds and widespread labor informality in developing economies. To resolve this structural discrepancy, \citet{blanchet2022weight} developed a non-parametric calibration framework that preserves the survey structure in the lower and middle distribution while transitioning to administrative tax records in the upper tail.
+
+The core methodological challenge lies in identifying an objective income threshold above which the survey distribution should be discarded in favor of tax records. This cutoff is termed the \textit{merging point} ($y^*$). In \citet{blanchet2022weight}, this point is determined endogenously where the relative density (marginal representativeness rate) equals the relative cumulative distribution between both sources. To ensure that this empirical calibration is well-defined and robust, it is essential to establish analytical conditions guaranteeing that the merging point exists and is strictly unique.
+
+In this appendix, we formalize the sufficient conditions for the existence and uniqueness of the merging point in both continuous income distributions and discrete quantile tabulations (such as generalized Pareto curves). The theoretical derivations rely on three foundational empirical premises:
+\begin{enumerate}
+    \item \textbf{Upper-tail under-representation and monotonicity:} In high-income strata, the survey captures progressively fewer individuals relative to tax registers ($\theta'(y) < 0$ and $\theta(y) < 1$).
+    \item \textbf{Initial over-representation anchoring:} Because surveys encompass informal and untaxed earnings, they capture more population than tax registers in the lower and middle strata ($\theta(y^*) \ge \Theta(y^*)$).
+    \item \textbf{Population conservation:} Integrating over the entire distribution, both sources converge to 100\% of the target population ($\lim_{y \to \infty} \Theta(y) = 1$). Any initial excess representation in the survey must asymptotically be offset by an upper-tail deficit.
+\end{enumerate}
+
+\subsection*{2. The Continuous Case}
+
+Let income $y$ follow a continuous distribution over support $[y_{\min}, \infty)$.
+
+\begin{definition}[Continuous Representativeness Dynamics]
+Let $f_X$ and $F_X$ denote the probability density function (PDF) and cumulative distribution function (CDF) of the survey distribution, respectively. Let $f_Y$ and $F_Y$ denote the corresponding PDF and CDF from administrative tax records. We define two key metrics:
+\begin{itemize}
+    \item \textbf{Marginal representativeness rate:} $\theta(y) = \frac{f_X(y)}{f_Y(y)}$.
+    \item \textbf{Cumulative representativeness rate:} $\Theta(y) = \frac{F_X(y)}{F_Y(y)}$.
+\end{itemize}
+\end{definition}
+
+The trajectory of cumulative representativeness $\Theta(y)$ across the income domain is governed by an ordinary differential equation derived via the quotient rule:
+\begin{align*}
+    \frac{\mathrm{d}}{\mathrm{d}y}\Theta(y) &= \frac{\mathrm{d}}{\mathrm{d}y}\left( \frac{F_X(y)}{F_Y(y)} \right) = \frac{F_X'(y)F_Y(y) - F_X(y)F_Y'(y)}{[F_Y(y)]^2} = \frac{f_X(y)F_Y(y) - F_X(y)f_Y(y)}{[F_Y(y)]^2}.
+\end{align*}
+Factoring out $\frac{f_Y(y)}{F_Y(y)}$ on the right-hand side:
+\begin{align*}
+    \frac{\mathrm{d}}{\mathrm{d}y}\Theta(y) &= \frac{f_Y(y)}{F_Y(y)} \left[ \frac{f_X(y)F_Y(y)}{f_Y(y)F_Y(y)} - \frac{F_X(y)}{F_Y(y)} \right] = \frac{f_Y(y)}{F_Y(y)} \left[ \frac{f_X(y)}{f_Y(y)} - \frac{F_X(y)}{F_Y(y)} \right].
+\end{align*}
+Recognizing that $r_Y(y) \equiv \frac{f_Y(y)}{F_Y(y)}$ is the \textit{reverse hazard rate} of the tax distribution, we establish the fundamental law of representativeness dynamics:
+\begin{equation}
+    \Theta'(y) = r_Y(y) \left[ \theta(y) - \Theta(y) \right].
+    \label{eq:representativeness_ode}
+\end{equation}
+Because densities and cumulative distributions are strictly positive on the interior of the support, the reverse hazard rate $r_Y(y) > 0$ everywhere. Consequently, the sign and direction of $\Theta'(y)$ depend exclusively on the difference $[\theta(y) - \Theta(y)]$.
+
+\begin{proposition}[Existence and Uniqueness in the Continuous Domain]
+Let $X$ and $Y$ be continuous random variables with support $[y_{\min}, \infty)$ and continuous, strictly positive densities $f_X$ and $f_Y$. Suppose there exists an income threshold $y^*$ such that:
+\begin{enumerate}
+    \item \textbf{Upper-tail marginal monotonicity:} For all $y > y^*$, the marginal rate $\theta(y)$ is strictly decreasing ($\theta'(y) < 0$) and reflects survey under-representation ($\theta(y) < 1$).
+    \item \textbf{Cumulative anchoring:} At threshold $y^*$, the survey remains over-represented relative to its cumulative proportion: $\theta(y^*) \ge \Theta(y^*)$.
+    \item \textbf{Asymptotic convergence:} As income approaches infinity, the full population is exhausted: $\lim_{y \to \infty} \Theta(y) = 1$.
+\end{enumerate}
+Then, there exists a unique merging point $\bar{y} \in (y^*, \infty)$ satisfying $\theta(\bar{y}) = \Theta(\bar{y})$.
+\end{proposition}
+
+\begin{proof}
+\textbf{(Existence)} Define the gap function $g(y) \equiv \theta(y) - \Theta(y)$. Since $f_X, f_Y, F_X, F_Y$ are continuous, $g(y)$ is continuous on $[y^*, \infty)$.
+Evaluating at the lower boundary $y^*$: by cumulative anchoring condition~(2), $g(y^*) \ge 0$.
+Evaluating asymptotic behavior: by condition~(1), $\theta(y) < 1$ for all $y > y^*$, whereas condition~(3) implies $\lim_{y \to \infty} \Theta(y) = 1$. Hence, for sufficiently large $y_1 \gg y^*$, $\theta(y_1) < 1 \le \Theta(y_1)$, so $g(y_1) < 0$.
+By Bolzano's Intermediate Value Theorem, there exists at least one root $\bar{y} \in [y^*, y_1)$ such that $g(\bar{y}) = 0$. This establishes the existence of a merging point.
+
+\textbf{(Uniqueness)} Let $\bar{y}$ be a root of $g(y)$ in $(y^*, \infty)$, so that $g(\bar{y}) = 0$. We examine the slope of $g(y)$ at this crossing point. Differentiating $g(y)$:
+\[
+    g'(y) = \theta'(y) - \Theta'(y).
+\]
+Substituting the fundamental ODE \eqref{eq:representativeness_ode}:
+\[
+    g'(y) = \theta'(y) - r_Y(y)\left[\theta(y) - \Theta(y)\right] = \theta'(y) - r_Y(y) g(y).
+\]
+Evaluating at the merging point $\bar{y}$, where $g(\bar{y}) = 0$:
+\[
+    g'(\bar{y}) = \theta'(\bar{y}) - r_Y(\bar{y}) \cdot 0 = \theta'(\bar{y}).
+\]
+Because $\bar{y} > y^*$, monotonicity condition~(1) applies, implying $\theta'(\bar{y}) < 0$. Thus, $g'(\bar{y}) < 0$ at \textit{every} potential crossing point, meaning that $g(y)$ crosses the horizontal axis strictly from above to below, entering the negative region ($g(y) < 0$).
+Suppose, for the sake of contradiction, that there exists a second crossing point $y_2 > \bar{y}$. By continuity, to cross zero from below at $y_2$, the function would require $g'(y_2) \ge 0$. However, evaluating the slope at $y_2$ yields $g'(y_2) = \theta'(y_2) < 0$, a direct contradiction. Therefore, the merging point $\bar{y}$ is strictly unique.
+\end{proof}
+
+\subsection*{3. Extension to the Discrete Quantile Domain}
+
+In empirical applications, tax administrations publish tabulated income brackets (such as the 126 generalized Pareto fractiles used in the BFM implementation). We extend the formal proof to discrete brackets.
+
+\begin{definition}[Discrete Representativeness Dynamics]
+Consider a discrete support partitioned into $K$ income brackets indexed by $k \in \{1, 2, \dots, K\}$. Let probability mass functions in bracket $k$ be $p_X(k)$ and $p_Y(k)$ for the survey and tax records, with cumulative distribution functions $P_X(k) = \sum_{i=1}^k p_X(i)$ and $P_Y(k) = \sum_{i=1}^k p_Y(i)$. We define:
+\begin{itemize}
+    \item \textbf{Discrete marginal rate:} $\theta_k = \frac{p_X(k)}{p_Y(k)}$.
+    \item \textbf{Discrete cumulative rate:} $\Theta_k = \frac{P_X(k)}{P_Y(k)}$.
+\end{itemize}
+\end{definition}
+
+The discrete analog of ODE \eqref{eq:representativeness_ode} is the recursive relationship connecting bracket $k-1$ to bracket $k$. By definition of cumulative probability, $P_Z(k) = P_Z(k-1) + p_Z(k)$ for $Z \in \{X, Y\}$. Substituting into $\Theta_k$:
+\begin{align*}
+    \Theta_k &= \frac{P_X(k-1) + p_X(k)}{P_Y(k)} = \frac{P_X(k-1)}{P_Y(k)} + \frac{p_X(k)}{P_Y(k)} \\
+    &= \left( \frac{P_X(k-1)}{P_Y(k-1)} \right) \frac{P_Y(k-1)}{P_Y(k)} + \left( \frac{p_X(k)}{p_Y(k)} \right) \frac{p_Y(k)}{P_Y(k)} \\
+    &= \Theta_{k-1} \left( \frac{P_Y(k) - p_Y(k)}{P_Y(k)} \right) + \theta_k \left( \frac{p_Y(k)}{P_Y(k)} \right) \\
+    &= \Theta_{k-1} \left( 1 - \frac{p_Y(k)}{P_Y(k)} \right) + \theta_k \left( \frac{p_Y(k)}{P_Y(k)} \right).
+\end{align*}
+Defining $\omega_k \equiv \frac{p_Y(k)}{P_Y(k)}$ (the discrete reverse hazard rate, satisfying $0 < \omega_k < 1$), the cumulative representativeness rate satisfies a strict convex combination:
+\begin{equation}
+    \Theta_k = (1 - \omega_k)\Theta_{k-1} + \omega_k \theta_k.
+    \label{eq:convex_combination}
+\end{equation}
+Equation \eqref{eq:convex_combination} demonstrates that current cumulative representativeness is a weighted average between past cumulative representativeness and the current marginal rate.
+
+\begin{proposition}[Existence and Uniqueness in the Discrete Domain]
+Suppose a finite discrete domain $\{1, \dots, K\}$ and a threshold $k^*$ such that:
+\begin{enumerate}
+    \item \textbf{Upper-tail monotonicity:} For all $k > k^*$, the survey declines monotonically relative to tax records ($\theta_{k+1} < \theta_k$) with systematic under-representation ($\theta_k < 1$).
+    \item \textbf{Anchoring:} $\theta_{k^*} \ge \Theta_{k^*}$.
+    \item \textbf{Asymptotic convergence:} In the final bracket, the entire population is exhausted ($P_X(K) = P_Y(K) = 1$), implying $\Theta_K = 1$.
+\end{enumerate}
+Then, there exists a unique index $\bar{k} \in (k^*, K]$ marking the merging point, defined as the first bracket where $\theta_{\bar{k}} < \Theta_{\bar{k}}$, and for all subsequent brackets $k \ge \bar{k}$, the inequality strictly holds: $\theta_k < \Theta_k$.
+\end{proposition}
+
+\begin{proof}
+\textbf{(Existence)} We argue by contradiction. Suppose there is no crossing, so that $\theta_k \ge \Theta_k$ for all $k \in \{k^*, \dots, K\}$. Substituting into recursive relation \eqref{eq:convex_combination}:
+\[
+    \Theta_k \ge (1 - \omega_k)\Theta_{k-1} + \omega_k \Theta_k \implies \Theta_k(1 - \omega_k) \ge (1 - \omega_k)\Theta_{k-1} \implies \Theta_k \ge \Theta_{k-1}.
+\]
+This implies that $\Theta_k$ is non-decreasing across the entire upper domain. Evaluating at the final bracket $K$ using condition~(3):
+\[
+    1 = \Theta_K = (1 - \omega_K)\Theta_{K-1} + \omega_K \theta_K.
+\]
+Because $\Theta$ is non-decreasing and bounded at 1, $\Theta_{K-1} \le 1$. Meanwhile, condition~(1) ensures $\theta_K < 1$. Thus, $\Theta_K$ is a convex combination of a term $\le 1$ and a term strictly $< 1$, which strictly implies $\Theta_K < 1$. This yields $1 < 1$, a contradiction.
+Because $\theta_k \ge \Theta_k$ cannot hold globally, and $\theta_{k^*} \ge \Theta_{k^*}$, the Well-Ordering Principle guarantees the existence of a minimal index $\bar{k} \in (k^*, K]$ such that $\theta_{\bar{k}} < \Theta_{\bar{k}}$.
+
+\textbf{(Uniqueness)} We prove by induction that once the inequality reverses at $\bar{k}$, it strictly propagates for all subsequent brackets: $\theta_k < \Theta_k \implies \theta_{k+1} < \Theta_{k+1}$ for all $k \ge \bar{k}$.
+\begin{itemize}
+    \item \textit{Base step ($k = \bar{k}$):} By definition, $\theta_{\bar{k}} < \Theta_{\bar{k}}$. Substituting into \eqref{eq:convex_combination}:
+    \[
+        \Theta_{\bar{k}} = (1 - \omega_{\bar{k}})\Theta_{\bar{k}-1} + \omega_{\bar{k}}\theta_{\bar{k}} < (1 - \omega_{\bar{k}})\Theta_{\bar{k}-1} + \omega_{\bar{k}}\Theta_{\bar{k}} \implies \Theta_{\bar{k}} < \Theta_{\bar{k}-1}.
+    \]
+    \item \textit{Inductive step:} Assume $\theta_k < \Theta_k$ holds for some $k \ge \bar{k} > k^*$. Since $k > k^*$, upper-tail monotonicity condition~(1) applies, so $\theta_{k+1} < \theta_k$.
+    By transitivity:
+    \[
+        \theta_{k+1} < \theta_k < \Theta_k \implies \theta_{k+1} < \Theta_k.
+    \]
+    Now evaluate cumulative representativeness at bracket $k+1$ using \eqref{eq:convex_combination}:
+    \[
+        \Theta_{k+1} = (1 - \omega_{k+1})\Theta_k + \omega_{k+1}\theta_{k+1}.
+    \]
+    Since $\Theta_{k+1}$ is a strict convex combination of $\Theta_k$ and $\theta_{k+1}$ (with $0 < \omega_{k+1} < 1$), it lies strictly between them:
+    \[
+        \theta_{k+1} < \Theta_{k+1} < \Theta_k.
+    \]
+\end{itemize}
+This completes the induction: $\theta_k < \Theta_k$ strictly holds for all $k \ge \bar{k}$. Consequently, the two sequences diverge permanently, ensuring that the discrete merging point is unique.
+\end{proof}

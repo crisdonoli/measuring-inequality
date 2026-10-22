@@ -1,0 +1,58 @@
+\documentclass[12pt]{article}
+
+\input{packages}
+\input{config}
+
+% Asignatura correspondiente
+\renewcommand{\headerinfo}{ENECO894\\Spring 2025}
+\renewcommand{\papertitle}{Problem Set 1: Public Finances}
+\renewcommand{\paperauthors}{
+  Cristobal Donoso-Oliva\textsuperscript{1},
+  Pablo Gutierrez\textsuperscript{2},
+  Javiera Parada R.\textsuperscript{3},
+  Juan Duarte A.\textsuperscript{3},
+  Marcelo Montes M.\textsuperscript{3}
+}
+\renewcommand{\paperroles}{
+  1. PhD Student in Economics \\
+  2. Professor \\
+  3. Teaching Assistants
+}
+
+
+\begin{document}
+\maketitlepaper
+
+
+\begin{abstract}
+  \noindent This document presents the complete solution to Problem Set 1 of Public Finance, where each section corresponds to one problem of the assignment. Section~\ref{sec:intergenerational-mobility} investigates intergenerational income mobility in Chile by replicating the Two-Sample Two-Stage Least Squares (TSTSLS) framework of \citet{nunez2010mobility} with Murphy--Topel variance corrections across historical CASEN surveys (1987, 1990, and 2006), and extends the analysis to labor informality through rank--rank regressions and multiple imputation under residual-correlation scenarios. Section~\ref{sec:wealth-inequality} analyzes household wealth inequality using the 2021 Household Financial Survey (\textit{Encuesta Financiera de Hogares}, EFH) from the Central Bank of Chile; addressing fat Pareto tails, negative net worth, and extreme unit non-response, we implement the pseudo-maximum likelihood tail-adjustment methodology of \citet{vermeulen2018} combining survey microdata with the \textit{Forbes World's Billionaires} list and benchmarking wealth aggregates to National Accounts totals. Section~\ref{sec:bfm-methodology} moves beyond parametric Pareto assumptions by examining the non-parametric calibration framework of \citet{blanchet2022weight} (BFM), endogenously identifying the survey-tax merging point ($y^*$) via fractal grid binning, generalized Pareto interpolation, and antitonic regression to reconcile CASEN income microdata (2017 and 2022) with administrative tax tabulations from the Chilean Internal Revenue Service (\textit{Servicio de Impuestos Internos}, SII). Section~\ref{sec:conclusions} concludes by synthesizing the core findings and outlining broader methodological and policy implications for inequality measurement.
+  
+  \noindent All replication code, data processing pipelines, and estimation routines are open-source and publicly available at \url{https://github.com/crisdonoli/measuring-inequality}.
+\end{abstract}
+\newpage
+\section{Intergenerational Income Mobility}\label{sec:intergenerational-mobility}
+\input{sections/01.tex}
+
+\newpage
+\section{Wealth Inequality}\label{sec:wealth-inequality}
+\input{sections/02.tex}
+
+\newpage
+\section{Moving Beyond Vermeulen: BFM (2022)}\label{sec:bfm-methodology}
+\input{sections/03.tex}
+
+\newpage
+\section{Conclusions}\label{sec:conclusions}
+\input{sections/04.tex}
+
+% =========================
+
+\newpage
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\newpage
+\appendix
+\input{sections/appendix.tex}
+
+\end{document}

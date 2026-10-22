@@ -1,0 +1,101 @@
+% Márgenes
+\geometry{
+  left=2.0cm,
+  right=2.0cm,
+  top=2.5cm,
+  bottom=3.5cm
+}
+
+% Interlineado
+\onehalfspacing
+
+% Encabezado y pie de página
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+
+% Encabezado y pie de página
+\pagestyle{fancy}
+\fancyhf{}
+\newcommand{\headerinfo}{Doctorado en Economía\\2025}
+
+\lhead{
+  \begin{minipage}[c]{0.5\textwidth}
+    \begin{tabular}{@{}l l@{}}
+      \raisebox{0.01cm}{\includegraphics[height=1.6cm]{figures/escudo_uch.jpeg}} &
+      \begin{minipage}[c]{0.75\textwidth}
+        \vspace{-1.5em} % Subir texto sin mover nada más
+        \small
+        Universidad de Chile\\Facultad de Economía y Negocios  
+      \end{minipage}
+    \end{tabular}
+  \end{minipage}
+}
+\rhead{
+  \small
+  \headerinfo   
+  \vspace{-1.7em} % Subir texto sin mover nada más
+}
+
+\rfoot{  
+  \small
+  \thepage}
+\lfoot{}
+
+% Ajustes de espacio
+\setlength{\headheight}{51pt}  % espacio reservado para el encabezado
+\setlength{\headsep}{25pt}     % espacio entre encabezado y texto
+
+% Metadatos básicos (se redefinen desde main.tex)
+\newcommand{\papertitle}{}
+\newcommand{\paperauthors}{}
+\newcommand{\paperroles}{}
+
+% Comando para construir el encabezado
+\newcommand{\maketitlepaper}{
+  \begin{center}
+    \Large \textbf{\papertitle} \\
+    \vspace{1.em}
+    \normalsize
+    \paperauthors \\
+    \vspace{0.8em}
+    \hspace*{0.8em} % pequeña indentación izquierda
+    \begin{minipage}{1.\textwidth} % ancho controlado para el bloque
+      \raggedright
+      \footnotesize
+      \paperroles
+    \end{minipage}
+  \end{center}
+
+  \vspace{-1.5em}
+  \begin{flushright}
+    \small \today
+  \end{flushright}
+  
+  \vspace{0.02em}
+  \hrule
+  \vspace{2.5em}
+}
+
+
+
+%% ANSWER BLOCK
+\tcbuselibrary{listings, minted}
+\newtcolorbox{answerbox}[1][\textwidth]{
+  enhanced,
+  breakable,
+  colback=white,
+  colframe=black,
+  boxrule=0.5pt,
+  arc=3pt,
+  left=8pt,
+  right=8pt,
+  top=8pt,
+  bottom=8pt,
+  boxsep=5pt,
+  sharp corners,
+  before skip=1em,
+  after skip=1em,
+  fonttitle=\bfseries,
+  width=#1
+}

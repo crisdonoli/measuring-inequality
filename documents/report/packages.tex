@@ -1,0 +1,57 @@
+% Paquetes esenciales
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{amsmath, amssymb, amsfonts, amsthm}
+\newtheorem{proposition}{Proposition}
+\newtheorem{definition}{Definition}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{setspace}
+\usepackage[most]{tcolorbox}
+\usepackage{listings}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable, skins}
+\usepackage{minted} % Asegúrate de compilar con -shell-escape
+\usepackage{etoolbox} 
+\usepackage{xparse} % permite definir comandos con 
+\usepackage[round,authoryear]{natbib}
+\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+\usepackage{booktabs}
+
+% Code blocks
+\definecolor{codegray}{gray}{0.95}
+\lstset{
+  backgroundcolor=\color{codegray},
+  basicstyle=\ttfamily\small,
+  frame=single,
+  numbers=left,
+  numberstyle=\tiny,
+  tabsize=2,
+  breaklines=true,
+  showstringspaces=false
+}
+
+% Hipervínculos
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue
+}
+
+% \newtcolorbox{answerbox}{
+%   colback=white,
+%   colframe=black,
+%   boxrule=0.8pt,
+%   arc=3pt,
+%   left=5pt,
+%   right=5pt,
+%   top=5pt,
+%   bottom=5pt
+% }
+
+% \newcommand{\answer}[1]{\begin{answerbox}#1\end{answerbox}}

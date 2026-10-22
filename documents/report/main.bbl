@@ -1,0 +1,146 @@
+\begin{thebibliography}{26}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[{Banco Central de Chile}(2021{\natexlab{a}})]{bcentral2021efh}
+{Banco Central de Chile}.
+\newblock Household finance survey (efh) 2021: Databases and user guide.
+\newblock Technical report, Banco Central de Chile, 2021{\natexlab{a}}.
+\newblock Imputed, non-imputed and replicate-weight databases; survey of $\sim$4,400 households.
+
+\bibitem[{Banco Central de Chile}(2021{\natexlab{b}})]{bcentral2021financialaccounts}
+{Banco Central de Chile}.
+\newblock Financial accounts by institutional sector: Financial balance of households and npish (ccnn\_cft\_s14\_af\_2018), 2021.
+\newblock Statistical Database (BDE), \url{https://si3.bcentral.cl/BDE/}, 2021{\natexlab{b}}.
+\newblock Reference 2018; quarterly stocks in billions of CLP, used for uprating.
+
+\bibitem[Benhabib and Bisin(2018)]{benhabib2018skewed}
+Jess Benhabib and Alberto Bisin.
+\newblock Skewed wealth distributions: Theory and empirics.
+\newblock \emph{Journal of Economic Literature}, 56\penalty0 (4):\penalty0 1261--1291, 2018.
+
+\bibitem[Blanchet et~al.(2022{\natexlab{a}})Blanchet, Flores, and Morgan]{blanchet2022weight}
+Thomas Blanchet, Ignacio Flores, and Marc Morgan.
+\newblock The weight of the rich: improving surveys using tax data.
+\newblock \emph{The Journal of Economic Inequality}, 20\penalty0 (1):\penalty0 119--150, 2022{\natexlab{a}}.
+
+\bibitem[Blanchet et~al.(2022{\natexlab{b}})Blanchet, Fournier, and Piketty]{blanchet2022generalized}
+Thomas Blanchet, Juliette Fournier, and Thomas Piketty.
+\newblock Generalized pareto curves: theory and applications.
+\newblock \emph{Review of Income and Wealth}, 68\penalty0 (1):\penalty0 263--288, 2022{\natexlab{b}}.
+
+\bibitem[Champernowne(1953)]{champernowne1953model}
+David~G Champernowne.
+\newblock A model of income distribution.
+\newblock \emph{The Economic Journal}, 63\penalty0 (250):\penalty0 318--351, 1953.
+
+\bibitem[Chen et~al.(1982)Chen, Tsaur, and Rhai]{chen1982relative}
+Chau-Nan Chen, Tien-Wang Tsaur, and Tong-Shieng Rhai.
+\newblock The relative gini concentration ratio.
+\newblock \emph{Econometrica}, 50\penalty0 (1):\penalty0 233--237, 1982.
+
+\bibitem[Clauset et~al.(2009)Clauset, Shalizi, and Newman]{clauset2009power}
+Aaron Clauset, Cosma~Rohilla Shalizi, and Mark~EJ Newman.
+\newblock Power-law distributions in empirical data.
+\newblock \emph{SIAM review}, 51\penalty0 (4):\penalty0 661--703, 2009.
+
+\bibitem[Deaton(2005)]{deaton2005measuring}
+Angus Deaton.
+\newblock Measuring poverty in a growing world (or measuring growth in a poor world).
+\newblock \emph{Review of Economics and Statistics}, 87\penalty0 (1):\penalty0 1--19, 2005.
+
+\bibitem[Deville and S{\"a}rndal(1992)]{DevilleSarndal1992}
+Jean-Claude Deville and Carl-Erik S{\"a}rndal.
+\newblock Calibration estimators in survey sampling.
+\newblock \emph{Journal of the American Statistical Association}, 87\penalty0 (418):\penalty0 376--382, 1992.
+\newblock \doi{10.1080/01621459.1992.10475217}.
+
+\bibitem[Fagereng et~al.(2020)Fagereng, Guiso, Malacrino, and Pistaferri]{fagereng2020heterogeneity}
+Andreas Fagereng, Luigi Guiso, Davide Malacrino, and Luigi Pistaferri.
+\newblock Heterogeneity and persistence in returns to wealth.
+\newblock \emph{Econometrica}, 88\penalty0 (1):\penalty0 115--170, 2020.
+
+\bibitem[{Forbes Media}(2021)]{forbes2021billionaires}
+{Forbes Media}.
+\newblock Forbes world's billionaires list 2021.
+\newblock \url{https://www.forbes.com/real-time-billionaires/}, 2021.
+\newblock Accessed 2026-10-19.
+
+\bibitem[Gabaix(2009)]{gabaix2009power}
+Xavier Gabaix.
+\newblock Power laws in economics and finance.
+\newblock \emph{Annual Review of Economics}, 1\penalty0 (1):\penalty0 255--294, 2009.
+
+\bibitem[Gabaix and Ibragimov(2011)]{gabaix2011rank}
+Xavier Gabaix and Rustam Ibragimov.
+\newblock Rank-1/2: A simple way to improve the {OLS} estimation of tail exponents.
+\newblock \emph{Journal of Business \& Economic Statistics}, 29\penalty0 (1):\penalty0 24--39, 2011.
+
+\bibitem[Gini(1912)]{gini1912variabilita}
+Corrado Gini.
+\newblock \emph{Variabilit{\`a} e mutabilit{\`a}: Contributo allo studio delle distribuzioni e relazioni statistiche}.
+\newblock Cuppini, 1912.
+
+\bibitem[Kim et~al.(2016)Kim, Berg, and Park]{kim2016statistical}
+Jae~Kwang Kim, Emily Berg, and Taeyoung Park.
+\newblock Statistical matching using fractional imputation.
+\newblock \emph{Survey Methodology, Statistics Canada}, 42\penalty0 (1):\penalty0 19--40, 2016.
+
+\bibitem[{Ministerio de Desarrollo Social y Familia, Observatorio Social}(2017)]{casen2017}
+{Ministerio de Desarrollo Social y Familia, Observatorio Social}.
+\newblock {Encuesta de Caracterizaci{\'o}n Socioecon{\'o}mica Nacional (CASEN) 2017}.
+\newblock \url{https://observatorio.ministeriodesarrollosocial.gob.cl/encuesta-casen-2017}, 2017.
+\newblock Accessed 2026-10-20.
+
+\bibitem[{Ministerio de Desarrollo Social y Familia, Observatorio Social}(2022)]{casen2022}
+{Ministerio de Desarrollo Social y Familia, Observatorio Social}.
+\newblock {Encuesta de Caracterizaci{\'o}n Socioecon{\'o}mica Nacional (CASEN) 2022}.
+\newblock \url{https://observatorio.ministeriodesarrollosocial.gob.cl/encuesta-casen-2022}, 2022.
+\newblock Accessed 2026-10-20.
+
+\bibitem[Murphy and Topel(1985)]{murphy1985estimation}
+Kevin~M. Murphy and Robert~H. Topel.
+\newblock Estimation and inference in two-step econometric models.
+\newblock \emph{Journal of Business \& Economic Statistics}, 3\penalty0 (4):\penalty0 370--379, 1985.
+
+\bibitem[N{\'u}{\~n}ez and Miranda(2010)]{nunez2010mobility}
+Javier~I. N{\'u}{\~n}ez and Leslie Miranda.
+\newblock Intergenerational income mobility in a less-developed, high-inequality context: The case of chile.
+\newblock \emph{The B.E. Journal of Economic Analysis \& Policy}, 10\penalty0 (1), 2010.
+
+\bibitem[{OECD}(2013)]{oecd2013wealth}
+{OECD}.
+\newblock \emph{OECD Guidelines for Micro Statistics on Household Wealth}.
+\newblock OECD Publishing, Paris, 2013.
+
+\bibitem[Raffinetti et~al.(2015)Raffinetti, Siletti, and Vernizzi]{raffinetti2015does}
+Emanuela Raffinetti, Elena Siletti, and Achille Vernizzi.
+\newblock Why, how and when the gini coefficient can be more than one.
+\newblock \emph{Economics Letters}, 126:\penalty0 83--86, 2015.
+
+\bibitem[Roy(2021)]{forbes2021kaggle}
+Sourav Roy.
+\newblock Forbes billionaires of 2021.
+\newblock Kaggle Dataset, \url{https://www.kaggle.com/datasets/roysouravcu/forbes-billionaires-of-2021}, 2021.
+\newblock Mirror of Forbes World's Billionaires 2021, accessed 2026-10-19.
+
+\bibitem[{Servicio de Impuestos Internos}(2025)]{sii2024personas}
+{Servicio de Impuestos Internos}.
+\newblock {Estadísticas de Personas Naturales — PUB\_Total.xlsb (2005--2024)}.
+\newblock \url{https://www.sii.cl/sobre_el_sii/estadisticas_de_personas_naturales.html}, 2025.
+\newblock Accessed 2026-10-20.
+
+\bibitem[Van~Buuren(2018)]{vanbuuren2018flexible}
+Stef Van~Buuren.
+\newblock \emph{Flexible Imputation of Missing Data}.
+\newblock Chapman and Hall/CRC, 2 edition, 2018.
+
+\bibitem[Vermeulen(2018)]{vermeulen2018}
+Philip Vermeulen.
+\newblock How fat is the top tail of the wealth distribution?
+\newblock \emph{Review of Income and Wealth}, 64\penalty0 (2):\penalty0 357--387, 2018.
+
+\end{thebibliography}
