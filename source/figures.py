@@ -671,7 +671,7 @@ def plot_mi_sensitivity(mires, fig, ax):
     return fig, ax
 
 
-def plot_bfm_theta_Theta_real(fig, ax, tilde, theta_hat, Theta_hat, yk, tax_share, pct=None, merging_pct=None, title="(e) Chile — BFM diagnostic"):
+def plot_bfm_theta_Theta_real(fig, ax, tilde, theta_hat, Theta_hat, yk, tax_share, pct=None, merging_pct=None, title="(e) Chile — BFM diagnostic", zoom_tail=True):
     """Real BFM diagnostic: theta vs Theta from estimate_merging_point.
 
     Args:
@@ -684,10 +684,13 @@ def plot_bfm_theta_Theta_real(fig, ax, tilde, theta_hat, Theta_hat, yk, tax_shar
             where cumsum(tax_share) no longer lines up with theta_hat.
         merging_pct: override percentile for vertical line (else from k*).
         title: panel title.
+        zoom_tail (bool): whether to add an inset zoom on the tail near 100.
 
     Returns:
         (Figure, Axes)
     """
+    from mpl_toolkits.axes_grid1.inset_locator import inset_axes, mark_inset
+
     if pct is None:
         if len(tax_share) != len(theta_hat):
             raise ValueError(
@@ -701,27 +704,53 @@ def plot_bfm_theta_Theta_real(fig, ax, tilde, theta_hat, Theta_hat, yk, tax_shar
     k_star = below[0] if len(below) else len(tilde)-1
     if merging_pct is None:
         merging_pct = float(pct[k_star]) if k_star < len(pct) else 83.5
-    # Plot
-    ax.axvline(merging_pct, color="gray", ls="--", lw=0.9, alpha=0.7)
-    ax.text(merging_pct, 2.95, "merging point", ha="center", va="bottom", fontsize=7, color="gray", style="italic")
+    # Main plot
+    ax.axvline(merging_pct, color="gray", ls="--", lw=1.0, alpha=0.7)
     # Red Theta (cumulative)
-    ax.plot(pct, Theta_hat, color="#c0392b", lw=1.8, marker="o", ms=4, label=r"$\Theta(y)$")
+    ax.plot(pct, Theta_hat, color="#c0392b", lw=1.8, marker="o", ms=3.5, label=r"$\Theta(y)$")
     # Blue antitonic
-    ax.plot(pct, theta_hat, color="#2e86c1", lw=1.8, marker="s", ms=4, label=r"$\theta(y)$ (antitonic)")
+    ax.plot(pct, theta_hat, color="#2e86c1", lw=1.8, marker="s", ms=3.5, label=r"$\theta(y)$ (antitonic)")
     # Grey dots raw theta
-    ax.scatter(pct, tilde, s=28, color="gray", alpha=0.6, edgecolors="white", linewidths=0.4, label=r"$\theta(y)$", zorder=3)
-    ax.set_xlim(75, 100)
-    ax.set_ylim(0, 3)
-    # Ticks similar to paper: P60, P80, P90, P99, P99.9...
-    # Map pct to labels: show nearest
-    # ax.set_xticks([60, 70, 80, 83.5, 90, 95, 99, 99.9])
-    # ax.set_xticklabels(["P60", "P70", "P80", "P83.5", "P90", "P95", "P99", "P99.9"], fontsize=7, rotation=15, ha="right")
+    ax.scatter(pct, tilde, s=22, color="gray", alpha=0.5, edgecolors="white", linewidths=0.3, label=r"$\theta(y)$ (raw)", zorder=3)
+    ax.set_xlim(75, 100.2)
+    ax.set_ylim(0, 3.05)
     ax.set_yticks([0, 1, 2, 3])
-    ax.set_xlabel("Percentile", fontsize=9)
-    ax.set_ylabel(r"$\theta(y)$ / $\Theta(y)$", fontsize=9)
-    ax.set_title(title, fontsize=9)
-    ax.legend(fontsize=7, loc="upper right", framealpha=0.9, ncol=2)
+    ax.set_xlabel("Percentile", fontsize=9.5)
+    ax.set_ylabel(r"$\theta(y)$ / $\Theta(y)$", fontsize=9.5)
+    ax.set_title(title, fontsize=10)
+    ax.legend(fontsize=7.5, loc="lower left", framealpha=0.9)
     ax.grid(True, axis="y", alpha=0.15)
+
+    if zoom_tail:
+        # Inset zoom on tail near 100
+        ax_in = inset_axes(
+            ax, width="45%", height="45%", loc="upper right",
+            bbox_to_anchor=(0.0, 0.0, 0.96, 0.96), bbox_transform=ax.transAxes, borderpad=0.3
+        )
+        ax_in.axvline(merging_pct, color="gray", ls="--", lw=1.0, alpha=0.8)
+        ax_in.plot(pct, Theta_hat, color="#c0392b", lw=1.8, marker="o", ms=3.5)
+        ax_in.plot(pct, theta_hat, color="#2e86c1", lw=1.8, marker="s", ms=3.5)
+        ax_in.scatter(pct, tilde, s=24, color="gray", alpha=0.6, edgecolors="white", linewidths=0.3, zorder=3)
+
+        x_min_zoom = 98.0 if merging_pct < 99.6 else 98.5
+        ax_in.set_xlim(x_min_zoom, 100.02)
+        ax_in.set_ylim(-0.05, 1.25)
+        ax_in.set_yticks([0, 0.5, 1.0])
+        ax_in.tick_params(labelsize=7)
+        ax_in.set_title(f"Tail zoom (P{merging_pct:.2f})", fontsize=7.5, pad=2)
+        ax_in.grid(True, alpha=0.2)
+
+        # Highlight merging point text inside inset
+        ax_in.annotate(
+            f"P{merging_pct:.2f}",
+            xy=(merging_pct, 0.2),
+            xytext=(merging_pct - 0.45 if merging_pct < 99.6 else merging_pct - 0.35, 0.6),
+            arrowprops=dict(arrowstyle="->", color="gray", lw=0.8),
+            fontsize=7, color="black", fontweight="bold"
+        )
+
+        mark_inset(ax, ax_in, loc1=2, loc2=4, fc="none", ec="0.6", ls=":", lw=0.7)
+
     return fig, ax
 
 
