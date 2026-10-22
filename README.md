@@ -291,7 +291,7 @@ latexmk -pdf main.tex
 
 `main.tex` compiles three sections: `sections/01.tex` (intergenerational mobility),
 `sections/02.tex` (wealth inequality with the Vermeulen correction) and `sections/03.tex`
-(BFM method, data and results), plus the appendix. Figures are included with paths
+(BFM method, data and results), plus the appendix/conclusions. Figures are included with paths
 relative to `sections/` (`../../figures/...`, `../../figures/p1/...`), so re-run the
 notebooks before rebuilding the PDF.
 
