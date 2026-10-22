@@ -9,3 +9,4 @@ __pycache__/
 data/CASEN/Casen2006.dta
 data/CASEN/casen_2017.dta
 data/CASEN/casen_2022.dta
+.rlibs/

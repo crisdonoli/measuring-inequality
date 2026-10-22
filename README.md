@@ -1,4 +1,4 @@
-# Inequality in Chile — Methods in Practice
+# Inequality in Chile: Methods in Practice
 
 An applied, reusable codebase that shows how inequality is measured and corrected in
 practice, from raw microdata to tail-corrected top shares:
@@ -28,7 +28,7 @@ inequality problems in `documents/PS1_FPA.pdf`; it is not tied to that assignmen
 | 3 | Weighted wealth shares (raw survey) | `shares.py` | `03_wealth_inequality.ipynb` | done |
 | 4 | Pareto tail correction + uprating (Vermeulen) | `pareto.py` | `04_vermeulen.ipynb` | done |
 | 5 | Data exploration: CASEN + SII tabulations | `casen.py`, `sii.py` | `05_data_exploration.ipynb` | done |
-| 6 | BFM correction with tax data (Chile 2017/2022) | `bfm.py` | `06_bfm.ipynb` | in progress |
+| 6 | BFM correction with tax data (Chile 2017/2022) | `bfm.py` | `06_bfm.ipynb` | done |
 | 7 | Intergenerational mobility (Núñez–Miranda) | `mobility.py` | `07_nunez_miranda.ipynb` | done |
 
 ## Repository layout
@@ -105,6 +105,9 @@ inequality problems in `documents/PS1_FPA.pdf`; it is not tied to that assignmen
 
 - Python >= 3.10 with `pandas`, `numpy`, `scipy`, `matplotlib`, `scikit-learn`,
   `pyarrow`, `fastparquet`, `pyxlsb`, `openpyxl`, `jupyter`.
+- R with `gpinter` installed in `.rlibs/` (outside git) for the BFM fractal-bin
+  interpolation. If `gpinter` is unavailable, `bfm.py` falls back to linear
+  interpolation with a warning.
 - A LaTeX distribution with `latexmk`. All figures are compiled with
   `text.usetex = True` (`source/__init__.py`), so `pdflatex` must be on `PATH`;
   without it the plotting cells fail.
@@ -124,7 +127,7 @@ cd notebooks
 jupyter lab          # or: jupyter notebook
 ```
 
-### 1. `01_efh_cleaning.ipynb` — survey to net wealth
+### 1. `01_efh_cleaning.ipynb`: survey to net wealth
 
 Loads `data/EFH/Base imputada EFH 2021.dta`, drops rows with missing `act_toth`,
 `d_toth` or `factor`, and builds
@@ -136,19 +139,19 @@ net_wealth = act_fin + cap_pen_ent + (act_vp + act_otp + act_vevic + act_otros) 
 Outputs `data/processed/efh_2021_clean.{csv,parquet}` and `figures/netwealth-efh.pdf`
 (weighted vs. unweighted density, share of total wealth by bin).
 
-### 2. `02_forbes.ipynb` — the rich list
+### 2. `02_forbes.ipynb`: the rich list
 
 Filters Chilean entries from the Forbes 2021 CSV, parses `NetWorth` (`'$17.7 B'` → `17.7`)
 and converts to CLP at **759.1 CLP/USD**.
 Outputs `data/processed/forbes_2021_clp.{csv,parquet}` and `figures/billionaires.pdf`.
 
-### 3. `03_wealth_inequality.ipynb` — shares from the survey alone
+### 3. `03_wealth_inequality.ipynb`: shares from the survey alone
 
 Baseline: survey-weighted bottom-50 / top-10 / top-1 wealth shares
 (`source.shares.weighted_shares`). This is the benchmark any correction has to beat.
 Outputs `figures/p2/share.pdf`.
 
-### 4. `04_vermeulen.ipynb` — Pareto tail correction
+### 4. `04_vermeulen.ipynb`: Pareto tail correction
 
 - estimates the Pareto tail index `alpha` above `w_min` with two methods: weighted MLE
   and the Gabaix–Ibragimov rank regression (`estimate_alpha_pareto`);
@@ -162,7 +165,7 @@ Outputs `figures/p2/share.pdf`.
 - reports raw vs. corrected shares and plots `shares_vermeulen.pdf`,
   `vermeulen_tail.pdf`.
 
-### 5. `05_data_exploration.ipynb` — survey and tax inputs
+### 5. `05_data_exploration.ipynb`: survey and tax inputs
 
 - **CASEN**: loads 2017 and 2022, reports missingness across income variables, and
   motivates the choice of `ytotcorh` (total household income, corrected for
@@ -176,7 +179,7 @@ Outputs `figures/p2/share.pdf`.
 Outputs `figures/p3/casen_income_dist.pdf`, `casen_lorenz.pdf`,
 `sii_brackets_comparison.pdf`.
 
-### 6. `06_bfm.ipynb` — merging point and calibration
+### 6. `06_bfm.ipynb`: merging point and calibration
 
 - fractal binning visual (`figures/p3/bfm_fractal_bins.pdf`), mirroring the
   0–99% / 99–99.9% / 99.9–99.99% / 99.99–99.999% structure of BFM (2022);
@@ -187,11 +190,15 @@ Outputs `figures/p3/casen_income_dist.pdf`, `casen_lorenz.pdf`,
   `[1/α, α]` with `α = 5`;
 - compares raw vs. BFM top shares.
 
-> **Caveat.** The public SII file publishes 7–8 UTA brackets, not the 126 fine bins
-> used in BFM (2022). The merging point is therefore coarse and lands in the top
-> bracket; see `documents/report/sections/03.tex` for the discussion.
+> **Caveat.** The public SII file publishes 7–8 UTA brackets. The tabulation is
+> interpolated with `gpinter` (generalized Pareto interpolation) and the fractal
+> grid is run over `[F_t(y2), 1]` because bracket 1 is exempt; together this
+> identifies `y*` (68.0 M CLP/year in 2017, 190.0 M in 2022). The top 1% is
+> identified in 2017 but in 2022 it rests on 12 observations and requires
+> `alpha >= 10` (with `alpha = 5` the clip underestimates by ~0.8 pp). See
+> `documents/report/sections/03.tex`.
 
-### 7. `07_nunez_miranda.ipynb` — intergenerational mobility
+### 7. `07_nunez_miranda.ipynb`: intergenerational mobility
 
 Python replication of the R implementation (`MirandaNunez.Rmd`):
 
@@ -220,8 +227,8 @@ sources:
 | `data/Forbes/forbes-2021-kaggle.csv` | Kaggle mirror of Forbes 2021 | yes |
 | `data/BDE/CCNN_CFT_S14_AF_2018.xlsx` | Banco Central de Chile, BDE | yes |
 | `data/CASEN/Casen1987.dta`, `Casen1990.dta` | CASEN (UChile) | yes (65 MB, 25 MB) |
-| `data/CASEN/Casen2006.dta` | CASEN (UChile) | **no** — 351 MB, exceeds GitHub's 100 MB limit |
-| `data/CASEN/casen_2017.dta`, `casen_2022.dta` | CASEN (UChile) | **no** — 478 MB and 568 MB |
+| `data/CASEN/Casen2006.dta` | CASEN (UChile) | **no** (351 MB, exceeds GitHub's 100 MB limit) |
+| `data/CASEN/casen_2017.dta`, `casen_2022.dta` | CASEN (UChile) | **no** (478 MB and 568 MB) |
 | `data/SII/PUB_Total.xlsb` | SII, natural persons 2005–2024 | yes (31 KB) |
 
 The three untracked CASEN files are listed in `.gitignore`. Download them from
@@ -272,9 +279,11 @@ notebooks before rebuilding the PDF.
 
 ## TO-DO
 
-- [ ] **BFM with fine bins.** Wire `gpinter` (generalized Pareto interpolation) to
+- [x] **BFM with fine bins.** Wire `gpinter` (generalized Pareto interpolation) to
       reconstruct the 126 fractal bins from the 7–8 published SII brackets, so the
       merging point is identified at the same resolution as BFM (2022).
+- [ ] **R dependency.** Make the `gpinter` install reproducible (e.g. `renv` or a
+      documented `install.packages` call) so `.rlibs/` is unnecessary.
 - [ ] **Comparability table** across methods (raw survey / Vermeulen / BFM) and surveys
       (EFH / CASEN), so the tutorial ends with a single summary figure.
 - [ ] **Parametrize constants**: move the FX rate, the National Accounts aggregate and

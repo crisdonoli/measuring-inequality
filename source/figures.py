@@ -671,23 +671,31 @@ def plot_mi_sensitivity(mires, fig, ax):
     return fig, ax
 
 
-def plot_bfm_theta_Theta_real(fig, ax, tilde, theta_hat, Theta_hat, yk, tax_share, merging_pct=None, title="(e) Chile — BFM diagnostic"):
+def plot_bfm_theta_Theta_real(fig, ax, tilde, theta_hat, Theta_hat, yk, tax_share, pct=None, merging_pct=None, title="(e) Chile — BFM diagnostic"):
     """Real BFM diagnostic: theta vs Theta from estimate_merging_point.
 
     Args:
         fig, ax: Figure/Axes.
-        tilde, theta_hat, Theta_hat: arrays length m (brackets).
+        tilde, theta_hat, Theta_hat: arrays length m (bins).
         yk: thresholds in CLP.
-        tax_share: w_k.
+        tax_share: w_k per bin; only used to derive the x-axis percentiles when pct is None.
+        pct: optional array with the lower-bound percentile (in %) of each bin, length m.
+            Needed whenever the bins are not the coarse SII brackets (e.g. the fractal grid),
+            where cumsum(tax_share) no longer lines up with theta_hat.
         merging_pct: override percentile for vertical line (else from k*).
         title: panel title.
 
     Returns:
         (Figure, Axes)
     """
-    # X as percentiles = 100 * cum_tax at y_k
-    cum_tax = np.cumsum(tax_share)
-    pct = np.concatenate([[0], cum_tax[:-1]]) * 100  # lower bound percentile
+    if pct is None:
+        if len(tax_share) != len(theta_hat):
+            raise ValueError(
+                f"tax_share length {len(tax_share)} != theta_hat length {len(theta_hat)}; pass pct="
+            )
+        cum_tax = np.cumsum(tax_share)
+        pct = np.concatenate([[0], cum_tax[:-1]]) * 100  # lower bound percentile
+    pct = np.asarray(pct, dtype=float)
     # Find k* where theta_hat < Theta_hat
     below = np.where(theta_hat < Theta_hat)[0]
     k_star = below[0] if len(below) else len(tilde)-1
@@ -702,7 +710,7 @@ def plot_bfm_theta_Theta_real(fig, ax, tilde, theta_hat, Theta_hat, yk, tax_shar
     ax.plot(pct, theta_hat, color="#2e86c1", lw=1.8, marker="s", ms=4, label=r"$\theta(y)$ (antitonic)")
     # Grey dots raw theta
     ax.scatter(pct, tilde, s=28, color="gray", alpha=0.6, edgecolors="white", linewidths=0.4, label=r"$\theta(y)$", zorder=3)
-    ax.set_xlim(0, 100)
+    ax.set_xlim(75, 100)
     ax.set_ylim(0, 3)
     # Ticks similar to paper: P60, P80, P90, P99, P99.9...
     # Map pct to labels: show nearest
